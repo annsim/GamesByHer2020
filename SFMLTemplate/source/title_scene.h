@@ -8,9 +8,10 @@ class TitleScene : public gbh::Scene
 {
 protected:
 	void onInitializeScene() override;
+	void onMouseEvent(sf::Event& event) override;
 
 	virtual void onUpdate(double deltaTime);
-	virtual void onMouseEvent(sf::Event& event);
+	//virtual void onMouseEvent(sf::Event& event);
 	virtual void onShowScene();
 	virtual void onHideScene();
 
