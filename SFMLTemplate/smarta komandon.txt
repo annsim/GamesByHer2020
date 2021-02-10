@@ -1,0 +1,5 @@
+
+Hämta subfolders från git i commando prompten
+
+git submodule update --init 
+git submodule update --remote

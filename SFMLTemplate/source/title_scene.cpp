@@ -14,6 +14,8 @@ const std::string kTitleScreenBackground = "../assets/gfx/starfield-01.png";
 const std::string kPlayerShip = "../assets/gfx/player-ship.png";
 
 
+
+
 void TitleScene::onInitializeScene()
 {
 	m_robotoFont.loadFromFile(kTitleScreenFont);
@@ -40,15 +42,30 @@ void TitleScene::onInitializeScene()
 	addChild(startButton);
 
 	std::shared_ptr<gbh::TextNode> startNode = std::make_shared<gbh::TextNode>("Start Game", m_robotoFont);
-	startNode->setPosition(20, 10);
+	startNode->setPosition(100, 20);
 	startNode->setName("StartButton");
 	startButton->addChild(startNode);
+
+	m_asteroid01 = std::make_shared<gbh::SpriteNode>("../assets/gfx/asteroid-medium-01.png");
+	m_asteroid01->setPosition(200, 200);
+	m_asteroid01->setOrigin(0.5f, 0.5f);
+	addChild(m_asteroid01);
+
+	m_asteroid03 = std::make_shared<gbh::SpriteNode>("../assets/gfx/asteroid-medium-03.png");
+	m_asteroid03->setPosition(800, 400);
+	m_asteroid03->setOrigin(0.5f, 0.5f);
+	addChild(m_asteroid03);
 }
 
 
 void TitleScene::onUpdate(double deltaTime)
 {
+	const float degreesPerSecond = 45.0f;
+	const float degreesPerSecond2 = 35.0f;
 
+	m_asteroid01->rotate(degreesPerSecond * deltaTime);
+	m_asteroid03->rotate(degreesPerSecond * deltaTime);
+	
 }
 
 
@@ -70,7 +87,9 @@ void TitleScene::onMouseEvent(sf::Event& event)
 
 void TitleScene::onShowScene()
 {
+	
 	m_titleMusic.play();
+	
 }
 
 
