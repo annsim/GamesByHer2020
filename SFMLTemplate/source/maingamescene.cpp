@@ -36,12 +36,13 @@ void MainGameScene::onInitializeScene()
 
 
 	//add asteroids
-	const sf::Vector2f asteroidRadius = sf::Vector2f(40.0f, 60.0f);
+	//const sf::Vector2f asteroidRadius = sf::Vector2f(40.0f, 60.0f);
+	sf::Vector2f ensity
 	m_asteroid01 = std::make_shared<gbh::SpriteNode>("../assets/gfx/asteroid-small-01.png");
 	m_asteroid01->setPosition(800, 400);
 	m_asteroid01->setScale(0.5f, 0.5f);
 	m_asteroid01->setOrigin(0.5f, 0.5f);
-	m_playerShip->setPhysicsBody(getPhysicsWorld()->createBox(asteroidRadius * 0.5f));
+	m_asteroid01->setPhysicsBody(getPhysicsWorld()->createCircle(10.0f));
 	m_asteroid01->getPhysicsBody()->setLinearDamping(20.0f);
 	m_asteroid01->getPhysicsBody()->setFixedRotation(true);
 	addChild(m_asteroid01);
