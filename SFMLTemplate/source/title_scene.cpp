@@ -16,6 +16,7 @@ const std::string kPlayerShip = "../assets/gfx/player-ship.png";
 
 
 
+
 void TitleScene::onInitializeScene()
 {
 	m_robotoFont.loadFromFile(kTitleScreenFont);

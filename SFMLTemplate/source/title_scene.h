@@ -18,5 +18,6 @@ private:
 	sf::Font m_robotoFont;
 	sf::Music m_titleMusic;
 	std::shared_ptr<gbh::SpriteNode> m_asteroid01;
-	std::shared_ptr < gbh::SpriteNode> m_asteroid03;
+	std::shared_ptr <gbh::SpriteNode> m_asteroid03;
+	
 };

@@ -5,6 +5,7 @@
 
 const std::string kStarField = "../assets/gfx/starfield-01.png";
 const std::string kPlayerShip = "../assets/gfx/player-ship.png";
+const std::string kCheckPointSprite = "../assets/gfx/checkpoint.png";
 
 void MainGameScene::onInitializeScene()
 {
@@ -24,6 +25,7 @@ void MainGameScene::onInitializeScene()
 	boundary->setPosition(1280.0f / 2.0f, 720.0f / 2.0f);
 	addChild(boundary);
 
+
 	//add player spaceship
 	const sf::Vector2f shipSize = sf::Vector2f(80.0f, 120.0f);
 	m_playerShip = std::make_shared<gbh::SpriteNode>(kPlayerShip);
@@ -34,10 +36,37 @@ void MainGameScene::onInitializeScene()
 	m_playerShip->getPhysicsBody()->setFixedRotation(true);
 	addChild(m_playerShip);
 
+	//add camera 
+	m_followCamera = std::make_shared<followCameraNode>();
+	m_followCamera->setTarget(m_playerShip);
+	m_followCamera->setPosition(640, 360);
+	addChild(m_followCamera);
+	setCamera(m_followCamera);
 
+	//add checkpoints
+	std::vector<sf::Vector2f> checkPointPositions = {
+		sf::Vector2f(640.0f, 720.0f),
+		sf::Vector2f(1240.0f, 200.0f),
+		sf::Vector2f(80.0f, 400.0f),
+	};
+
+	for (int i = 0; i < checkPointPositions.size(); ++i) {
+		sf::Vector2f position = checkPointPositions[i];
+
+		std::shared_ptr<gbh::SpriteNode> node = std::make_shared<gbh::SpriteNode>(kCheckPointSprite);
+		node->setColor(kInactiveCheckpoint);
+		node->setPhysicsBody(getPhysicsWorld()->createCircle(50));
+		node->getPhysicsBody()->makeSensor();
+		node->getPhysicsBody()->setEnabled(false);
+		node->setPosition(checkpoints[i]);
+		node->setName("checkpoint");
+
+		m_checkPoints.push_back(node);
+		addChild(node);
+
+	}
 	//add asteroids
 	//const sf::Vector2f asteroidRadius = sf::Vector2f(40.0f, 60.0f);
-	sf::Vector2f ensity
 	m_asteroid01 = std::make_shared<gbh::SpriteNode>("../assets/gfx/asteroid-small-01.png");
 	m_asteroid01->setPosition(800, 400);
 	m_asteroid01->setScale(0.5f, 0.5f);
